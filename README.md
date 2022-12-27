@@ -1,5 +1,5 @@
 # Background
-##M icroservice Architecture
+## Microservice Architecture
 Microservices architectures offer a flexible and scalable approach to software development, enabling faster development, easier maintenance, increased scalability, and better code reusability. To ensure that microservices are well designed and efficient, developers must take a holistic approach to the entire system, including how microservices communicate with each other, how data is shared between replicas within services, and how services interact with other architectural components. Frameworks like Spring Boot and JPA/Hibernate can help make development easier, but they cannot provide a complete solution for efficiently sharing data between replicas and, worse yet, they can increase the risk of data bloat and system complexity. Therefore, developers should strive to create their own customized solutions, tailored to their specific data sharing needs, to maximize the effectiveness of their microservices.
 
 ## Pipeline Pattern
