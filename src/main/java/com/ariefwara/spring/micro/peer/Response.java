@@ -1,8 +1,14 @@
 package com.ariefwara.spring.micro.peer;
 
-public class Response<T> {
+import java.util.List;
 
-	public T getResponse(){
+public class Response {
+
+	public <T> T result(Class<T> as){
+		return null;
+	}
+	
+	public <T> List<T> result(Class<? extends List<?>> asList, Class<T> as){
 		return null;
 	}
 	

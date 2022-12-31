@@ -9,7 +9,7 @@ import com.ariefwara.spring.micro.cache.parallel.Prepared;
 @Component
 public class Parallel {
 
-	public Object[] perform(Callable<?>... callables) {
+	public Object[] run(Callable<?>... callables) {
 		return new Object[] {};
 	}
 	
