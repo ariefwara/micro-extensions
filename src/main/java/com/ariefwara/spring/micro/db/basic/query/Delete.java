@@ -40,4 +40,9 @@ public class Delete extends BasicOperation {
 		
 	}
 	
+	@Override
+	public String finalizeQuery(String query) {
+		return query.replaceAll(", \\)", "\\)");
+	}
+	
 }

@@ -44,5 +44,10 @@ public class Insert extends BasicOperation {
 		}
 		
 	}
+
+	@Override
+	public String finalizeQuery(String query) {
+		return query.replaceAll(", \\)", "\\)");
+	}
 	
 }

@@ -35,7 +35,14 @@ public abstract class BasicOperation {
 	public <T> Affected<T> exec(Preparation<T> on) {
 		
 		T bean = on.setup();
-		buildQuery(bean.getClass());
+		String query;
+		try {
+			query = finalizeQuery(buildQuery(bean.getClass()).apply(bean));
+		} catch (IOException e) {
+			throw new UndeclaredThrowableException(e);
+		}
+		
+		System.out.println(query);
 		
 		return null;
 	}
@@ -62,5 +69,6 @@ public abstract class BasicOperation {
 	}
 
 	public abstract Template buildQuery(Class<?> type);
+	public abstract String finalizeQuery(String query);
 	
 }
