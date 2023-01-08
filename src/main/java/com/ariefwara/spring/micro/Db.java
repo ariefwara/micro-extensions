@@ -13,11 +13,11 @@ import com.ariefwara.spring.micro.db.basic.query.Selected;
 public class Db {
 
 	public <T> Affected<T> exec(BasicOperation operation, Preparation<T> on) {
-		return null;
+		return operation.exec(on);
 	}
 	
 	public <T> Selected<T> exec(BasicSelect operation, Preparation<T> on) {
-		return null;
+		return operation.exec(on);
 	}
 	
 	public <T> T op(Class<T> on) {
