@@ -2,6 +2,8 @@ package com.ariefwara.spring.micro.db.basic.query;
 
 import java.io.IOException;
 import java.lang.reflect.UndeclaredThrowableException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import com.ariefwara.spring.micro.db.BasicOperation;
@@ -15,20 +17,22 @@ public class Update extends BasicOperation {
 		Map<String, String> fieldMap = extractFieldMap(type);
 
 		StringBuilder sb = new StringBuilder();
-		sb.append(String.format("INSERT INTO %s SET (", type.getDeclaredAnnotation(Entity.class).value()));
+		sb.append(String.format("UPDATE %s SET ", type.getDeclaredAnnotation(Entity.class).value()));
+		
+		List<String> keys = Arrays.asList(type.getDeclaredAnnotation(Entity.class).keys());
 		for (Map.Entry<String, String> entry : fieldMap.entrySet()) {
-			sb.append(String.format("{{#not-null %s}}%s, {{/not-null}}", entry.getValue(), entry.getKey(),
+			if (keys.contains(entry.getKey())) continue;
+			sb.append(String.format("%s = :%s, ", entry.getKey(), entry.getValue(),
 					entry.getValue()));
 		}
 
-		sb.append(") VALUES (");
+		sb.append("WHERE");
 
 		for (Map.Entry<String, String> entry : fieldMap.entrySet()) {
-			sb.append(String.format("{{#not-null %s}}:%s, {{/not-null}}", entry.getValue(), entry.getValue(),
+			if (!keys.contains(entry.getKey())) continue;
+			sb.append(String.format(" AND %s = :%s", entry.getKey(), entry.getValue(),
 					entry.getValue()));
 		}
-
-		sb.append(")");
 
 		try {
 
@@ -43,7 +47,7 @@ public class Update extends BasicOperation {
 
 	@Override
 	public String finalizeQuery(String query) {
-		return query.replaceAll(", \\)", "\\)");
+		return query.replaceAll(", WHERE AND", " WHERE");
 	}
 
 }

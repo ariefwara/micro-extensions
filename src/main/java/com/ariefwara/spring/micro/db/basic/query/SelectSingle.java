@@ -8,7 +8,7 @@ import com.ariefwara.spring.micro.db.BasicOperation;
 import com.ariefwara.spring.micro.db.annotation.Entity;
 import com.github.jknack.handlebars.Template;
 
-public class SelectFirst extends BasicOperation {
+public class SelectSingle extends BasicOperation {
 
 	public Template buildQuery(Class<?> type) {
 
