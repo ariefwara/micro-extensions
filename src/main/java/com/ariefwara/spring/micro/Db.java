@@ -12,15 +12,19 @@ import com.ariefwara.spring.micro.db.basic.query.Selected;
 @Component
 public class Db {
 
-	public <T> Affected<T> exec(BasicOperation operation, Preparation<T> on) {
+	public <T> Affected<T> execute(BasicOperation operation, Preparation<T> on) {
 		return operation.exec(on);
 	}
 	
-	public <T> Selected<T> exec(BasicSelect operation, Preparation<T> on) {
-		return operation.exec(on);
+	public <T> Affected<T> execute(BasicSelect operation, Preparation<T> on) {
+		return null;
 	}
 	
-	public <T> T op(Class<T> on) {
+	public <T, E> Selected<T> execute(BasicSelect operation, Class<E> entity, Preparation<T> where) {
+		return operation.exec(where);
+	}
+	
+	public <T> T operate(Class<T> advanceOperation) {
 		return null;
 	}
 	
