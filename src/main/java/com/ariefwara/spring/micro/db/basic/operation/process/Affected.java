@@ -1,4 +1,4 @@
-package com.ariefwara.spring.micro.db.basic.query.operation;
+package com.ariefwara.spring.micro.db.basic.operation.process;
 
 import java.util.Optional;
 import java.util.function.Function;

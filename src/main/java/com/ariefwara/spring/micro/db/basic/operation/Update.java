@@ -1,19 +1,22 @@
-package com.ariefwara.spring.micro.db.basic.query;
+package com.ariefwara.spring.micro.db.basic.operation;
 
-import java.io.IOException;
-import java.lang.reflect.UndeclaredThrowableException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ariefwara.spring.micro.db.BasicOperation;
 import com.ariefwara.spring.micro.db.annotation.Entity;
-import com.github.jknack.handlebars.Template;
+import com.ariefwara.spring.micro.db.basic.Operation;
 
-public class Update extends BasicOperation {
+public class Update extends Operation {
 
-	public Template buildQuery(Class<?> type) {
+	static Map<Class<?>, String> queries = new HashMap<>();
+	
+	public String buildQuery(Object bean) {
 
+		Class<?> type = bean.getClass();
+		if (queries.containsKey(type)) return queries.get(type);
+		
 		Map<String, String> fieldMap = extractFieldMap(type);
 
 		StringBuilder sb = new StringBuilder();
@@ -34,20 +37,10 @@ public class Update extends BasicOperation {
 					entry.getValue()));
 		}
 
-		try {
-
-			Template template = handlebars.compileInline(sb.toString());
-			return template;
-
-		} catch (IOException e) {
-			throw new UndeclaredThrowableException(e);
-		}
-
-	}
-
-	@Override
-	public String finalizeQuery(String query) {
-		return query.replaceAll(", WHERE AND", " WHERE");
+		String query = sb.toString().replaceAll(", WHERE AND", " WHERE");
+		queries.put(type, query);
+		return query;
+		
 	}
 
 }

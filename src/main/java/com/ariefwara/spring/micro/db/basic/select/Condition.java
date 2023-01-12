@@ -1,4 +1,4 @@
-package com.ariefwara.spring.micro.db.basic.query.select;
+package com.ariefwara.spring.micro.db.basic.select;
 
 @FunctionalInterface
 public interface Condition {

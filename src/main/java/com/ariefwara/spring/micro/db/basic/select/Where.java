@@ -1,7 +1,9 @@
-package com.ariefwara.spring.micro.db.basic.query.select;
+package com.ariefwara.spring.micro.db.basic.select;
 
 public class Where {
 
+	
+	
 	private Where() {}
 	
 	public static Where oneEqOne() {
