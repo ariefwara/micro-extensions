@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import com.ariefwara.spring.micro.db.BasicOperation;
 import com.ariefwara.spring.micro.db.Block;
 import com.ariefwara.spring.micro.db.basic.query.Affected;
+import com.ariefwara.spring.micro.db.basic.query.Condition;
 import com.ariefwara.spring.micro.db.basic.query.Preparation;
 import com.ariefwara.spring.micro.db.basic.query.Selected;
 
@@ -19,7 +20,7 @@ public class Db {
 		return null;
 	}
 	
-	public <T, E> Selected<T> select(Class<E> from, Preparation<T> where) {
+	public <T> Selected<T> select(Class<T> from, Condition<T> where) {
 		return null;
 	}
 	
