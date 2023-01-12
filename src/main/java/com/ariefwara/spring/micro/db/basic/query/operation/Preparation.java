@@ -1,4 +1,4 @@
-package com.ariefwara.spring.micro.db.basic.query;
+package com.ariefwara.spring.micro.db.basic.query.operation;
 
 @FunctionalInterface
 public interface Preparation<T> {

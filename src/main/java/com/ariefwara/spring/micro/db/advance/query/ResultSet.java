@@ -1,4 +1,4 @@
-package com.ariefwara.spring.micro.db.custom.query;
+package com.ariefwara.spring.micro.db.advance.query;
 
 import java.util.List;
 import java.util.Map;

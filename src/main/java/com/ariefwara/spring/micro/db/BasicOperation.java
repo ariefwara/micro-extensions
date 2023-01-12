@@ -8,8 +8,8 @@ import java.util.Map;
 
 import com.ariefwara.spring.micro.db.annotation.Column;
 import com.ariefwara.spring.micro.db.annotation.Entity;
-import com.ariefwara.spring.micro.db.basic.query.Affected;
-import com.ariefwara.spring.micro.db.basic.query.Preparation;
+import com.ariefwara.spring.micro.db.basic.query.operation.Affected;
+import com.ariefwara.spring.micro.db.basic.query.operation.Preparation;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Helper;
 import com.github.jknack.handlebars.Options;

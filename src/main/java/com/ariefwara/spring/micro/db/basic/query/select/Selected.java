@@ -1,4 +1,4 @@
-package com.ariefwara.spring.micro.db.basic.query;
+package com.ariefwara.spring.micro.db.basic.query.select;
 
 import java.util.List;
 import java.util.function.Function;
