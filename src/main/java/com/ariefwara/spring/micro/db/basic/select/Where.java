@@ -1,7 +1,9 @@
 package com.ariefwara.spring.micro.db.basic.select;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Where {
 	
@@ -95,6 +97,33 @@ public class Where {
 		clauses.add(clause);
 		
 		return new Operator(clauses);
+	}
+	
+	public String buildQuery() {
+		
+		StringBuilder sb = new StringBuilder("WHERE 1 = 1");
+		for (Clause clause : clauses) {
+			if (clause.whenNotNull && clause.value == null) continue;
+			sb.append(" AND ");
+			sb.append(clause.column);
+			sb.append(" ");
+			sb.append(clause.operator);
+			sb.append(" :");
+			sb.append(clause.column);
+		}
+		
+		return sb.toString();
+	}
+	
+	public Map<String, Object> getParameters(){
+		
+		Map<String, Object> parameters = new HashMap<>();
+		for (Clause clause : clauses) {
+			if (clause.whenNotNull && clause.value == null) continue;
+			parameters.put(clause.column, clause.value);
+		}
+		
+		return parameters;
 	}
 	
 }
