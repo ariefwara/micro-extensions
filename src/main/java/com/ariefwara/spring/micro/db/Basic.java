@@ -5,7 +5,7 @@ import com.ariefwara.spring.micro.db.basic.operation.Insert;
 import com.ariefwara.spring.micro.db.basic.operation.Select;
 import com.ariefwara.spring.micro.db.basic.operation.Update;
 
-public class Op {
+public class Basic {
 	
 	public static Select SELECT = new Select();
 	public static Insert INSERT = new Insert();
