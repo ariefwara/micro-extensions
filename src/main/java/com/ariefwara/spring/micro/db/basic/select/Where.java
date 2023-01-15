@@ -1,9 +1,12 @@
 package com.ariefwara.spring.micro.db.basic.select;
 
+import java.lang.reflect.UndeclaredThrowableException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.text.CaseUtils;
 
 public class Where {
 	
@@ -109,7 +112,9 @@ public class Where {
 			sb.append(" ");
 			sb.append(clause.operator);
 			sb.append(" :");
-			sb.append(clause.column);
+			sb.append(CaseUtils.toCamelCase(clause.column, false, new char[]{'_'}));
+			sb.append(clause.operator.contains("<")?"_to":"");
+			sb.append(clause.operator.contains(">")?"_from":"");
 		}
 		
 		return sb.toString();
@@ -120,7 +125,11 @@ public class Where {
 		Map<String, Object> parameters = new HashMap<>();
 		for (Clause clause : clauses) {
 			if (clause.whenNotNull && clause.value == null) continue;
-			parameters.put(clause.column, clause.value);
+			String var = CaseUtils.toCamelCase(clause.column, false, new char[]{'_'});
+			var = var.concat(clause.operator.contains("<")?"_to":"");
+			var = var.concat(clause.operator.contains(">")?"_from":"");
+			if (parameters.containsKey(var)) throw new UndeclaredThrowableException(new Exception("Duplicate/simmiliar comparation for ".concat(clause.column)));
+			parameters.put(var, clause.value);
 		}
 		
 		return parameters;
