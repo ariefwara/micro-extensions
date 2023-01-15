@@ -1,88 +1,100 @@
 package com.ariefwara.spring.micro.db.basic.select;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Where {
 	
-	StringBuilder completeClause;
-	StringBuilder clause;
-	Map<String, Object> args;
+	public class Clause {
+		
+		String column;
+		String operator;
+		Object value;
+		Boolean whenNotNull = false;
+		
+	}
 	
-	public Where(StringBuilder completeClause, StringBuilder clause, Map<String, Object> args) {
-		super();
-		this.completeClause = completeClause;
-		this.clause = clause;
-		this.args = args;
+	List<Clause> clauses;;
+	
+	public Where(List<Clause> clauses) {
+		this.clauses = clauses;
 	}
 
 	public static Where oneEqOne() {
-		return new Where(new StringBuilder("WHERE 1 = 1"), new StringBuilder(), new HashMap<>());
+		return new Where(new ArrayList<>());
 	}
 	
 	public class WhereIf extends Where {
 		
-		public WhereIf(StringBuilder completeClause, StringBuilder clause, Map<String, Object> args) {
-			super(completeClause, clause, args);
+		Clause clause;
+		
+		public WhereIf(List<Clause> clauses) {
+			super(clauses);
+			clause = clauses.get(clauses.size() - 1);
 		}
 		
 		public Where whenNotNull() { 
-			return new Where(completeClause, clause, args);
+			clause.whenNotNull = true;
+			return new Where(clauses);
 		}
 		
 	}
 	
 	public class Operator {
 		
-		StringBuilder completeClause;
-		StringBuilder clause;
-		Map<String, Object> args;
+		List<Clause> clauses;
+		Clause clause;
 		
-		public Operator(StringBuilder completeClause, StringBuilder clause, Map<String, Object> args) {
-			this.completeClause = completeClause;
-			this.clause = clause;
-			this.args = args;
+		public Operator(List<Clause> clauses) {
+			this.clauses = clauses;
+			clause = clauses.get(clauses.size() - 1);
 		}
 		
 		public WhereIf eq(Object to) { 
-			clause.append(" = ");
-			return new WhereIf(completeClause, clause, args); 
+			clause.operator = "=";
+			clause.value = to;
+			return new WhereIf(clauses); 
 		}
 		
 		public WhereIf lt(Object to) { 
-			clause.append(" < ");
-			return new WhereIf(completeClause, clause, args);
+			clause.operator = "<";
+			clause.value = to;
+			return new WhereIf(clauses);
 		}
 		
 		public WhereIf gt(Object to) { 
-			clause.append(" > ");
-			return new WhereIf(completeClause, clause, args); 
+			clause.operator = ">";
+			clause.value = to;
+			return new WhereIf(clauses); 
 		}
 		
 		public WhereIf lte(Object to) { 
-			clause.append(" <= ");
-			return new WhereIf(completeClause, clause, args); 
+			clause.operator = "<=";
+			clause.value = to;
+			return new WhereIf(clauses); 
 		}
 		
 		public WhereIf gte(Object to) { 
-			clause.append(" >= ");
-			return new WhereIf(completeClause, clause, args); 
+			clause.operator = ">=";
+			clause.value = to;
+			return new WhereIf(clauses); 
 		}
 		
 		public WhereIf like(Object to) { 
-			clause.append(" like ");
-			return new WhereIf(completeClause, clause, args); 
+			clause.operator = "like";
+			clause.value = to;
+			return new WhereIf(clauses); 
 		}
 	
 	}
 	
 	public Operator and(String column) {
 		
-		StringBuilder clause = new StringBuilder(" AND ");
-		clause.append(column);
-		args.put(column, "xcc");
+		Clause clause = new Clause();
+		clause.column = column;
+		clauses.add(clause);
 		
-		return new Operator(completeClause, clause, args);
+		return new Operator(clauses);
 	}
 	
 }
