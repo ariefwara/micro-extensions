@@ -1,4 +1,4 @@
-package com.ariefwara.spring.micro.db.basic.operation;
+package com.ariefwara.spring.micro.db.basic.statement;
 
 import java.io.IOException;
 import java.lang.reflect.UndeclaredThrowableException;
@@ -6,14 +6,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.ariefwara.spring.micro.db.annotation.Entity;
-import com.ariefwara.spring.micro.db.basic.Operation;
+import com.ariefwara.spring.micro.db.basic.Statement;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Helper;
 import com.github.jknack.handlebars.Options;
 import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.internal.lang3.StringUtils;
 
-public class Insert extends Operation {
+public class Insert extends Statement {
+
 
 	protected Handlebars handlebars = new Handlebars();
 	{

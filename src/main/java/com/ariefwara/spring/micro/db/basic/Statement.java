@@ -2,23 +2,28 @@ package com.ariefwara.spring.micro.db.basic;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.UndeclaredThrowableException;
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.ariefwara.spring.micro.db.annotation.Column;
 import com.ariefwara.spring.micro.db.annotation.Entity;
-import com.ariefwara.spring.micro.db.basic.operation.process.Affected;
-import com.ariefwara.spring.micro.db.basic.operation.process.Target;
+import com.ariefwara.spring.micro.db.basic.statement.result.Affect;
 
-public abstract class Operation {
+public abstract class Statement {
+	
+	Connection c;
 	
 	
-	
-	
-	public <T> Affected<T> exec(Target<T> on) {
+	public Statement connection(Connection c) {
+		this.c = c;
+		return this;
+	}
+
+	public <T> Affect<T> exec(T target) {
 		
-		T bean = on.setup();
-		String query = buildQuery(bean);
+		
+		String query = buildQuery(target);
 		System.out.println(query);
 		
 		return null;

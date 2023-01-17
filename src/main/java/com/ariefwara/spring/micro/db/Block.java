@@ -1,8 +1,8 @@
 package com.ariefwara.spring.micro.db;
 
 @FunctionalInterface
-public interface Block {
+public interface Block<T> {
 	
-	public void intact();
+	public T intact(Operation operation);
 	
 }
