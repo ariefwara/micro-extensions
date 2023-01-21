@@ -1,5 +1,6 @@
 package com.ariefwara.micro.ext.db.operation;
 
+import java.sql.Connection;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,10 @@ import com.ariefwara.micro.ext.db.flag.Entity;
 
 public class Select extends Statement {
 
+
+	public Select(Connection c) {
+		super(c);
+	}
 
 	static Map<Class<?>, String> queries = new HashMap<>();
 	

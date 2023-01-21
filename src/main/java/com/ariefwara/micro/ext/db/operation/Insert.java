@@ -2,6 +2,7 @@ package com.ariefwara.micro.ext.db.operation;
 
 import java.io.IOException;
 import java.lang.reflect.UndeclaredThrowableException;
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +16,10 @@ import com.github.jknack.handlebars.internal.lang3.StringUtils;
 
 public class Insert extends Statement {
 
+
+	public Insert(Connection c) {
+		super(c);
+	}
 
 	protected Handlebars handlebars = new Handlebars();
 	{

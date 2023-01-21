@@ -1,5 +1,6 @@
 package com.ariefwara.micro.ext.db.operation;
 
+import java.sql.Connection;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +10,10 @@ import com.ariefwara.micro.ext.db.Statement;
 import com.ariefwara.micro.ext.db.flag.Entity;
 
 public class Delete extends Statement {
+
+	public Delete(Connection c) {
+		super(c);
+	}
 
 	static Map<Class<?>, String> queries = new HashMap<>();
 	

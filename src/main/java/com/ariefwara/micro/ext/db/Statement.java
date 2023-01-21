@@ -14,7 +14,11 @@ public abstract class Statement {
 	
 	Connection c;
 	
-	
+	public Statement(Connection c) {
+		super();
+		this.c = c;
+	}
+
 	public Statement setConnection(Connection c) {
 		this.c = c;
 		return this;

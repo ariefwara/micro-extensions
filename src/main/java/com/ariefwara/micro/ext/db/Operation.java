@@ -10,6 +10,7 @@ import com.ariefwara.micro.ext.db.operation.Prepared;
 import com.ariefwara.micro.ext.db.operation.Select;
 import com.ariefwara.micro.ext.db.operation.Update;
 import com.ariefwara.micro.ext.db.operation.Where;
+import com.ariefwara.micro.ext.db.operation.post.PostOperation;
 
 public class Operation {
 	
@@ -21,19 +22,22 @@ public class Operation {
 	}
 	
 	public <T> Optional<T> select(T object){
-		return  new Select().setConnection(conn).exec(object);
+		return new Select(conn).exec(object);
 	}
 	
-	public <T> Optional<T> insert(T object){
-		return  new Insert().setConnection(conn).exec(object);
+	public <T> PostOperation<T> insert(T object){
+		new Insert(conn).exec(object);
+		return new PostOperation<T>(conn, object);
 	}
 	 
-	public <T> Optional<T> update(T object){
-		return  new Update().setConnection(conn).exec(object);
+	public <T> PostOperation<T> update(T object){
+		new Update(conn).exec(object);
+		return new PostOperation<T>(conn, object);
 	} 
 	
-	public <T> Optional<T> delete(T object){
-		return  new Delete().setConnection(conn).exec(object);
+	public <T> PostOperation<T> delete(T object){
+		new Delete(conn).exec(object);
+		return new PostOperation<T>(conn, object);
 	}
 	
 	public <T> List<T> select(Class<T> from, Where condition){
@@ -41,7 +45,7 @@ public class Operation {
 	}
 	
 	public <T> T prepared(Class<T> target){
-		return new Prepared().setConnection(conn).exec(target);
+		return new Prepared(conn).exec(target);
 	}
 
 	public Connection getConnection() {

@@ -9,6 +9,8 @@ import java.util.Map;
 
 import org.apache.commons.text.CaseUtils;
 
+import com.ariefwara.micro.ext.db.flag.Entity;
+
 public class Where {
 	
 	public class Clause {
@@ -137,6 +139,11 @@ public class Where {
 	}
 	
 	public <T> List<T> exec(Class<T> from) {
+		
+		StringBuilder sb = new StringBuilder("SELECT * FROM ");
+		sb.append(from.getAnnotation(Entity.class).value());
+		sb.append(buildQuery());
+		
 		return null;
 	}
 
