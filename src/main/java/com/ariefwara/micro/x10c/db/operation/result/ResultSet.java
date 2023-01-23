@@ -1,4 +1,4 @@
-package com.ariefwara.micro.x10c.db.operation.post;
+package com.ariefwara.micro.x10c.db.operation.result;
 
 import java.util.ArrayList;
 import java.util.Map;

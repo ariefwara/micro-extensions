@@ -6,11 +6,11 @@ import java.util.Optional;
 
 import com.ariefwara.micro.x10c.db.operation.Delete;
 import com.ariefwara.micro.x10c.db.operation.Insert;
+import com.ariefwara.micro.x10c.db.operation.PostOperation;
 import com.ariefwara.micro.x10c.db.operation.Prepared;
 import com.ariefwara.micro.x10c.db.operation.Select;
 import com.ariefwara.micro.x10c.db.operation.Update;
 import com.ariefwara.micro.x10c.db.operation.Where;
-import com.ariefwara.micro.x10c.db.operation.post.PostOperation;
 
 public class Operation {
 	

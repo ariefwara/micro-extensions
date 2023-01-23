@@ -1,9 +1,7 @@
-package com.ariefwara.micro.x10c.db.operation.post;
+package com.ariefwara.micro.x10c.db.operation;
 
 import java.sql.Connection;
 import java.util.Optional;
-
-import com.ariefwara.micro.x10c.db.operation.Select;
 
 public class PostOperation<T> {
 
