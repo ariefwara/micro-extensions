@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.apache.commons.text.CaseUtils;
 
+import com.ariefwara.micro.x10c.db.BeanMap;
 import com.ariefwara.micro.x10c.db.flag.Entity;
 import com.axiomalaska.jdbc.NamedParameterPreparedStatement;
 
@@ -153,21 +154,16 @@ public class Where {
 			sb.append(buildQuery());
 
 			String query = sb.toString();
-
+			
 			NamedParameterPreparedStatement ps = NamedParameterPreparedStatement
 					.createNamedParameterPreparedStatement(c, query);
-
-			Map<String, Object> parameters = getParameters();
-
-			for (Map.Entry<String, Object> entry : parameters.entrySet()) {
-				String key = entry.getKey();
-				Object val = entry.getValue();
-				ps.setObject(key, val);
-			}
-
+			BeanMap.namedParameterPreparedStatementMap(ps, getParameters());
 			ResultSet rs = ps.executeQuery();
+			List<T> result = BeanMap.resultSetAsList(rs, from);
+			rs.close();
+			ps.close();
 			
-			return null;
+			return result;
 			
 		} catch (Exception e) {
 			throw new UndeclaredThrowableException(e);
