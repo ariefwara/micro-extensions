@@ -3,12 +3,14 @@ package com.ariefwara.micro.ext.db;
 import java.lang.reflect.Field;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 import com.ariefwara.micro.ext.db.flag.Column;
 import com.ariefwara.micro.ext.db.flag.Entity;
+import com.axiomalaska.jdbc.NamedParameterPreparedStatement;
 
 public abstract class Statement {
 	
@@ -26,9 +28,19 @@ public abstract class Statement {
 
 	public <T> Optional<T> exec(T target) {
 		
-		
-		String query = buildQuery(target);
-		System.out.println(query);
+		try {
+			
+			String query = buildQuery(target);
+			NamedParameterPreparedStatement ps = NamedParameterPreparedStatement.createNamedParameterPreparedStatement(c, query);
+			
+			
+			
+			ps.setObject(query, ps);
+			ps.execute();
+			
+		} catch (Exception e) {
+			throw new UndeclaredThrowableException(e);
+		}
 		
 		return null;
 	}
