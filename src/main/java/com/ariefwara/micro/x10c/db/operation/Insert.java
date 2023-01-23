@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.ariefwara.micro.x10c.db.BeanMap;
 import com.ariefwara.micro.x10c.db.Statement;
 import com.ariefwara.micro.x10c.db.flag.Entity;
 import com.github.jknack.handlebars.Handlebars;
@@ -42,7 +43,7 @@ public class Insert extends Statement {
 		Class<?> type = bean.getClass();
 		if (!templates.containsKey(type)) {
 
-			Map<String, String> fieldMap = extractFieldMap(type);
+			Map<String, String> fieldMap = BeanMap.extractFieldMap(type);
 
 			StringBuilder sb = new StringBuilder();
 			sb.append(String.format("INSERT INTO %s SET (", type.getDeclaredAnnotation(Entity.class).value()));
