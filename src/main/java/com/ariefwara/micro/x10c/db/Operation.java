@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import com.ariefwara.micro.x10c.db.operation.Delete;
 import com.ariefwara.micro.x10c.db.operation.Insert;
-import com.ariefwara.micro.x10c.db.operation.PostOperation;
+import com.ariefwara.micro.x10c.db.operation.Next;
 import com.ariefwara.micro.x10c.db.operation.Prepared;
 import com.ariefwara.micro.x10c.db.operation.Select;
 import com.ariefwara.micro.x10c.db.operation.Update;
@@ -25,19 +25,19 @@ public class Operation {
 		return new Select(conn).exec(object);
 	}
 	
-	public <T> PostOperation<T> insert(T object){
+	public <T> Next<T> insert(T object){
 		new Insert(conn).exec(object);
-		return new PostOperation<T>(conn, object);
+		return new Next<T>(conn, object);
 	}
 	 
-	public <T> PostOperation<T> update(T object){
+	public <T> Next<T> update(T object){
 		new Update(conn).exec(object);
-		return new PostOperation<T>(conn, object);
+		return new Next<T>(conn, object);
 	} 
 	
-	public <T> PostOperation<T> delete(T object){
+	public <T> Next<T> delete(T object){
 		new Delete(conn).exec(object);
-		return new PostOperation<T>(conn, object);
+		return new Next<T>(conn, object);
 	}
 	
 	public <T> List<T> select(Class<T> from, Where condition){

@@ -3,12 +3,12 @@ package com.ariefwara.micro.x10c.db.operation;
 import java.sql.Connection;
 import java.util.Optional;
 
-public class PostOperation<T> {
+public class Next<T> {
 
 	T bean;
 	Connection c;
 	
-	public PostOperation(Connection c, T bean) {
+	public Next(Connection c, T bean) {
 		super();
 		this.c = c;
 		this.bean = bean;
