@@ -2,6 +2,7 @@ package com.ariefwara.micro.x10c.db;
 
 import java.lang.reflect.UndeclaredThrowableException;
 import java.sql.Connection;
+import java.util.Map;
 import java.util.Optional;
 
 import com.ariefwara.micro.x10c.util.BeanMap;
@@ -28,7 +29,10 @@ public abstract class Statement {
 			String query = buildQuery(target);
 			NamedParameterPreparedStatement ps = NamedParameterPreparedStatement.createNamedParameterPreparedStatement(c, query);
 			BeanMap.namedParameterPreparedStatementSet(ps, target);
-			ps.execute();
+			ps.executeUpdate();
+			BeanMap.resultSetAsList(ps.getGeneratedKeys(), Map.class);
+			
+			
 			ps.close();
 			
 		} catch (Exception e) {
