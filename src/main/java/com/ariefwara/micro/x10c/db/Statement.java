@@ -4,6 +4,7 @@ import java.lang.reflect.UndeclaredThrowableException;
 import java.sql.Connection;
 import java.util.Optional;
 
+import com.ariefwara.micro.x10c.util.BeanMap;
 import com.axiomalaska.jdbc.NamedParameterPreparedStatement;
 
 public abstract class Statement {

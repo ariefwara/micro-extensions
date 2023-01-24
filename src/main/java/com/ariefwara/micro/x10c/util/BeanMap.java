@@ -1,4 +1,4 @@
-package com.ariefwara.micro.x10c.db;
+package com.ariefwara.micro.x10c.util;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.UndeclaredThrowableException;

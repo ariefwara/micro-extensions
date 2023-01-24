@@ -6,9 +6,9 @@ import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.ariefwara.micro.x10c.db.BeanMap;
 import com.ariefwara.micro.x10c.db.Statement;
 import com.ariefwara.micro.x10c.db.flag.Entity;
+import com.ariefwara.micro.x10c.util.BeanMap;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Helper;
 import com.github.jknack.handlebars.Options;

@@ -10,8 +10,8 @@ import java.util.Map;
 
 import org.apache.commons.text.CaseUtils;
 
-import com.ariefwara.micro.x10c.db.BeanMap;
 import com.ariefwara.micro.x10c.db.flag.Entity;
+import com.ariefwara.micro.x10c.util.BeanMap;
 import com.axiomalaska.jdbc.NamedParameterPreparedStatement;
 
 public class Where {
