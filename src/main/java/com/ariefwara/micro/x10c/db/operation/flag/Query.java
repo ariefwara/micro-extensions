@@ -1,4 +1,4 @@
-package com.ariefwara.micro.x10c.db.flag;
+package com.ariefwara.micro.x10c.db.operation.flag;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 public @interface Query {
 	
 	String[] value();
-	
+
 }
