@@ -79,6 +79,19 @@ public class BeanMap {
 		}
 
 	}
+	
+	public static void asMap(Object bean) {
+
+		try {
+			Class<?> type = bean.getClass();
+			Map<String, Object> fieldMap;
+
+			
+		} catch (Exception e) {
+			throw new UndeclaredThrowableException(e);
+		}
+
+	}
 
 	public static void namedParameterPreparedStatementSet(NamedParameterPreparedStatement namedParameterPreparedStatement, Object bean) {
 
