@@ -11,6 +11,8 @@ import java.util.Map;
 import org.apache.commons.text.CaseUtils;
 
 import com.ariefwara.micro.x10c.db.flag.Entity;
+import com.ariefwara.micro.x10c.db.mapper.JDBCPreparedStatment;
+import com.ariefwara.micro.x10c.db.mapper.JDBCResultSet;
 import com.ariefwara.micro.x10c.util.BeanMap;
 import com.axiomalaska.jdbc.NamedParameterPreparedStatement;
 
@@ -157,9 +159,9 @@ public class Where {
 			
 			NamedParameterPreparedStatement ps = NamedParameterPreparedStatement
 					.createNamedParameterPreparedStatement(c, query);
-			BeanMap.namedParameterPreparedStatementMap(ps, getParameters());
+			new JDBCPreparedStatment(ps).setParameters(getParameters());
 			ResultSet rs = ps.executeQuery();
-			List<T> result = BeanMap.resultSetAsList(rs, from);
+			List<T> result = new JDBCResultSet(rs).asList(from);
 			rs.close();
 			ps.close();
 			
