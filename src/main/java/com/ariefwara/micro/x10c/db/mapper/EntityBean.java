@@ -5,15 +5,22 @@ import java.lang.reflect.UndeclaredThrowableException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.ariefwara.micro.x10c.common.mapper.FlatBean;
 import com.ariefwara.micro.x10c.db.flag.Column;
 import com.ariefwara.micro.x10c.db.flag.Entity;
 
-public class EntityBean {
+public class EntityBean extends FlatBean {
 
 	static Map<Class<?>, Map<String, String>> fieldMaps = new HashMap<>();
+	
+	public EntityBean(Object bean) {
+		super(bean);
+	}
 
-	public Map<String, String> fieldMapping(Class<?> type) {
+	public Map<String, String> fieldMapping() {
 
+		Class<?> type = bean.getClass();
+		
 		if (fieldMaps.containsKey(type))
 			return fieldMaps.get(type);
 

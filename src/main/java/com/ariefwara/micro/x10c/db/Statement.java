@@ -5,8 +5,9 @@ import java.sql.Connection;
 import java.util.Map;
 import java.util.Optional;
 
+import com.ariefwara.micro.x10c.common.mapper.FlatBean;
+import com.ariefwara.micro.x10c.db.mapper.JDBCPreparedStatment;
 import com.ariefwara.micro.x10c.db.mapper.JDBCResultSet;
-import com.ariefwara.micro.x10c.util.BeanMap;
 import com.axiomalaska.jdbc.NamedParameterPreparedStatement;
 
 public abstract class Statement {
@@ -29,7 +30,7 @@ public abstract class Statement {
 			
 			String query = buildQuery(target);
 			NamedParameterPreparedStatement ps = NamedParameterPreparedStatement.createNamedParameterPreparedStatement(c, query);
-			BeanMap.namedParameterPreparedStatementSet(ps, target);
+			new JDBCPreparedStatment(c, query).setParameters(target);
 			
 			ps.executeUpdate();
 			new JDBCResultSet(ps.getGeneratedKeys()).mergeWith(target);

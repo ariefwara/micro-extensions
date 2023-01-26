@@ -4,10 +4,10 @@ import java.lang.reflect.Proxy;
 import java.sql.Connection;
 import java.util.Map;
 
+import com.ariefwara.micro.x10c.common.mapper.FlatBean;
 import com.ariefwara.micro.x10c.db.operation.flag.Query;
 import com.ariefwara.micro.x10c.db.operation.type.Execution;
 import com.ariefwara.micro.x10c.db.operation.type.Selection;
-import com.ariefwara.micro.x10c.util.BeanMap;
 
 public class Prepared {
 
@@ -28,7 +28,7 @@ public class Prepared {
 			        	if (methodArgs[0] instanceof Map) {
 							return null;
 						} else {
-							BeanMap.asMap(methodArgs[0]);
+							new FlatBean(methodArgs[0]).asMap();
 						}
 			        	
 			        	method.getReturnType().equals(Selection.class);

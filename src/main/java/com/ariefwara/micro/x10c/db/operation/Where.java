@@ -2,6 +2,7 @@ package com.ariefwara.micro.x10c.db.operation;
 
 import java.lang.reflect.UndeclaredThrowableException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +14,6 @@ import org.apache.commons.text.CaseUtils;
 import com.ariefwara.micro.x10c.db.flag.Entity;
 import com.ariefwara.micro.x10c.db.mapper.JDBCPreparedStatment;
 import com.ariefwara.micro.x10c.db.mapper.JDBCResultSet;
-import com.ariefwara.micro.x10c.util.BeanMap;
 import com.axiomalaska.jdbc.NamedParameterPreparedStatement;
 
 public class Where {
@@ -157,11 +157,13 @@ public class Where {
 
 			String query = sb.toString();
 			
-			NamedParameterPreparedStatement ps = NamedParameterPreparedStatement
-					.createNamedParameterPreparedStatement(c, query);
-			new JDBCPreparedStatment(ps).setParameters(getParameters());
+			PreparedStatement ps = new JDBCPreparedStatment(c, query)
+					.setParameters(getParameters())
+					.getPreparedStatement();
+			
 			ResultSet rs = ps.executeQuery();
 			List<T> result = new JDBCResultSet(rs).asList(from);
+			
 			rs.close();
 			ps.close();
 			
