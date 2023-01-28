@@ -25,5 +25,10 @@
 			<artifactId>jdbc-named-parameters</artifactId>
 			<version>1.1</version>
 		</dependency>
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>5.0.1</version>
+		</dependency>
 	</dependencies>
 </project>
