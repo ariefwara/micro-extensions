@@ -1,4 +1,4 @@
-# Background
+# Background & Objective
 The increasing complexity of modern applications, combined with the need to process large amounts of data in real-time, has led to the need for a more scalable and resilient approach to application development. Microservices provide a way to break down applications into smaller, independent components, each with its own database and service responsibilities. This approach allows applications to be more resilient to changes, while still providing the necessary performance and scalability needed.
 
 However, developing and deploying microservices can be complex and time consuming. This project seeks to simplify the process by providing an easy-to-use microservice extension that allows applications to quickly and easily add microservices to their application architecture. The extension will provide specialized database access functions with cross-cache capabilities across replicas, as well as cross-operation between services.
