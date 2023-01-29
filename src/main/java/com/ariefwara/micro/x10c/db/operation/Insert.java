@@ -42,9 +42,11 @@ public class Insert extends Statement {
 	public String buildQuery(Object bean) {
 		Template template;
 		Class<?> type = bean.getClass();
+		EntityBean entityBean = new EntityBean(bean);
+		
 		if (!templates.containsKey(type)) {
 
-			Map<String, String> fieldMap = new EntityBean(bean).fieldMapping();
+			Map<String, String> fieldMap = entityBean.fieldMapping();
 			System.out.println(fieldMap);
 			StringBuilder sb = new StringBuilder();
 			sb.append(String.format("INSERT INTO %s (", type.getDeclaredAnnotation(Entity.class).value()));
@@ -75,7 +77,7 @@ public class Insert extends Statement {
 		
 		try {
 
-			return template.apply(bean).replaceAll(", \\)", "\\)");
+			return template.apply(entityBean.asMap()).replaceAll(", \\)", "\\)");
 
 		} catch (IOException e) {
 			throw new UndeclaredThrowableException(e);
