@@ -29,8 +29,8 @@ public abstract class Statement {
 		try {
 			
 			String query = buildQuery(target);
-			NamedParameterPreparedStatement ps = NamedParameterPreparedStatement.createNamedParameterPreparedStatement(c, query);
-			new JDBCPreparedStatment(c, query).setParameters(target);
+			System.out.println(query);
+			NamedParameterPreparedStatement ps = new JDBCPreparedStatment(c, query).setParameters(target).getPreparedStatement();
 			
 			ps.executeUpdate();
 			new JDBCResultSet(ps.getGeneratedKeys()).mergeWith(target);

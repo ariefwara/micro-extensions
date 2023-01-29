@@ -25,7 +25,7 @@ public class Insert extends Statement {
 
 	protected Handlebars handlebars = new Handlebars();
 	{
-		handlebars.registerHelper("not-null", new Helper<Object>() {
+		handlebars.registerHelper("whenNotNull", new Helper<Object>() {
 
 			@Override
 			public CharSequence apply(Object context, Options options) throws IOException {
@@ -45,18 +45,18 @@ public class Insert extends Statement {
 		if (!templates.containsKey(type)) {
 
 			Map<String, String> fieldMap = new EntityBean(bean).fieldMapping();
-
+			System.out.println(fieldMap);
 			StringBuilder sb = new StringBuilder();
-			sb.append(String.format("INSERT INTO %s SET (", type.getDeclaredAnnotation(Entity.class).value()));
+			sb.append(String.format("INSERT INTO %s (", type.getDeclaredAnnotation(Entity.class).value()));
 			for (Map.Entry<String, String> entry : fieldMap.entrySet()) {
-				sb.append(String.format("{{#not-null %s}}%s, {{/not-null}}", entry.getValue(), entry.getKey(),
+				sb.append(String.format("{{#whenNotNull %s}}%s, {{/whenNotNull}}", entry.getValue(), entry.getKey(),
 						entry.getValue()));
 			}
 
 			sb.append(") VALUES (");
 
 			for (Map.Entry<String, String> entry : fieldMap.entrySet()) {
-				sb.append(String.format("{{#not-null %s}}:%s, {{/not-null}}", entry.getValue(), entry.getValue(),
+				sb.append(String.format("{{#whenNotNull %s}}:%s, {{/whenNotNull}}", entry.getValue(), entry.getValue(),
 						entry.getValue()));
 			}
 
