@@ -12,7 +12,7 @@ import com.axiomalaska.jdbc.NamedParameterPreparedStatement;
 
 public abstract class Statement {
 	
-	Connection c;
+	protected Connection c;
 	
 	public Statement(Connection c) {
 		super();

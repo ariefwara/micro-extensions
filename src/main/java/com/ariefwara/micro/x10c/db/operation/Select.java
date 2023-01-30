@@ -1,14 +1,19 @@
 package com.ariefwara.micro.x10c.db.operation;
 
+import java.lang.reflect.UndeclaredThrowableException;
 import java.sql.Connection;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.ariefwara.micro.x10c.db.Statement;
 import com.ariefwara.micro.x10c.db.flag.Entity;
 import com.ariefwara.micro.x10c.db.mapper.EntityBean;
+import com.ariefwara.micro.x10c.db.mapper.JDBCPreparedStatment;
+import com.ariefwara.micro.x10c.db.mapper.JDBCResultSet;
+import com.axiomalaska.jdbc.NamedParameterPreparedStatement;
 
 public class Select extends Statement {
 
@@ -34,10 +39,29 @@ public class Select extends Statement {
 					entry.getValue()));
 		}
 
-		String query = sb.toString().replaceAll(", WHERE AND", " WHERE");
+		String query = sb.toString().replaceAll(" WHERE AND", " WHERE");
 		queries.put(type, query);
 		return query;
 
+	}
+	@Override
+	public <T> Optional<T> exec(T target) {
+		
+		try {
+			
+			String query = buildQuery(target);
+			System.out.println(query);
+			NamedParameterPreparedStatement ps = new JDBCPreparedStatment(c, query).setParameters(target).getPreparedStatement();
+			
+			new JDBCResultSet(ps.executeQuery()).mergeWith(target);
+			
+			ps.close();
+			
+		} catch (Exception e) {
+			throw new UndeclaredThrowableException(e);
+		}
+		
+		return null;
 	}
 	
 }

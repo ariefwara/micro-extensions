@@ -25,7 +25,7 @@ public class Delete extends Statement {
 		Map<String, String> fieldMap = new EntityBean(bean).fieldMapping();
 
 		StringBuilder sb = new StringBuilder();
-		sb.append(String.format("UPDATE %s WHERE", type.getDeclaredAnnotation(Entity.class).value()));
+		sb.append(String.format("DELETE FROM %s WHERE", type.getDeclaredAnnotation(Entity.class).value()));
 		List<String> keys = Arrays.asList(type.getDeclaredAnnotation(Entity.class).keys());
 		for (Map.Entry<String, String> entry : fieldMap.entrySet()) {
 			if (!keys.contains(entry.getKey())) continue;
@@ -33,7 +33,7 @@ public class Delete extends Statement {
 					entry.getValue()));
 		}
 
-		String query = sb.toString().replaceAll(", WHERE AND", " WHERE");
+		String query = sb.toString().replaceAll(" WHERE AND", " WHERE");
 		queries.put(type, query);
 		return query;
 
