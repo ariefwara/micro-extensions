@@ -39,7 +39,7 @@ public class Db {
 				c.rollback();
 				c.close();
 				throw e;
-			} 
+			}
 			
 		} catch (Exception e) {
 			throw new UndeclaredThrowableException(e);

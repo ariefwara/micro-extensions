@@ -41,4 +41,26 @@ public class EntityBean extends FlatBean {
 		return fieldMap;
 	}
 	
+	public static Map<String, String> fieldMapping(Class<?> type) {
+		
+		if (fieldMaps.containsKey(type))
+			return fieldMaps.get(type);
+
+		if (!type.isAnnotationPresent(Entity.class))
+			throw new UndeclaredThrowableException(new Exception("Non Entity Object"));
+		Field[] fields = type.getDeclaredFields();
+
+		Map<String, String> fieldMap = new HashMap<>();
+		for (Field field : fields) {
+			if (!field.isAnnotationPresent(Column.class))
+				continue;
+			fieldMap.put(field.getAnnotation(Column.class).value(), field.getName());
+			field.setAccessible(true);
+		}
+
+		fieldMaps.put(type, fieldMap);
+
+		return fieldMap;
+	}
+	
 }
