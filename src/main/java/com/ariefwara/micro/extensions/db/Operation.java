@@ -26,18 +26,15 @@ public class Operation {
 	}
 	
 	public <T> Next<T> insert(T object){
-		new Insert(conn).exec(object);
-		return new Next<T>(conn, object);
+		return new Next<T>(conn, new Insert(conn).exec(object).get());
 	}
 	 
 	public <T> Next<T> update(T object){
-		new Update(conn).exec(object);
-		return new Next<T>(conn, object);
+		return new Next<T>(conn, new Update(conn).exec(object).get());
 	} 
 	
 	public <T> Next<T> delete(T object){
-		new Delete(conn).exec(object);
-		return new Next<T>(conn, object);
+		return new Next<T>(conn, new Delete(conn).exec(object).get());
 	}
 	
 	public <T> List<T> select(Class<T> from, Where condition){

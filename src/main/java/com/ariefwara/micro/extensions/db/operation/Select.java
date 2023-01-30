@@ -44,6 +44,7 @@ public class Select extends Statement {
 		return query;
 
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public <T> Optional<T> exec(T target) {
 		
@@ -53,15 +54,17 @@ public class Select extends Statement {
 			System.out.println(query);
 			NamedParameterPreparedStatement ps = new JDBCPreparedStatment(c, query).setParameters(target).getPreparedStatement();
 			
-			new JDBCResultSet(ps.executeQuery()).mergeWith(target);
+			List<T> result = (List<T>) new JDBCResultSet(ps.executeQuery()).asList(target.getClass());
 			
 			ps.close();
+			
+			if (result.size() == 0) return Optional.empty();
+			return Optional.of(result.get(0));
 			
 		} catch (Exception e) {
 			throw new UndeclaredThrowableException(e);
 		}
 		
-		return null;
 	}
 	
 }

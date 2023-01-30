@@ -17,7 +17,9 @@ public class JDBCResultSet {
 	}
 
 	public <T> List<T> asList(Class<T> from) {
-		// TODO Auto-generated method stub
+		
+		
+		
 		return null;
 	}
 	

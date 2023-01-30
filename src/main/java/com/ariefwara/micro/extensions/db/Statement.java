@@ -37,11 +37,12 @@ public abstract class Statement {
 			
 			ps.close();
 			
+			return Optional.of(target);
+			
 		} catch (Exception e) {
 			throw new UndeclaredThrowableException(e);
 		}
 		
-		return null;
 	}
 
 	public abstract String buildQuery(Object bean);
