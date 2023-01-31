@@ -3,12 +3,12 @@ package com.ariefwara.micro.extensions.db.operation;
 import java.sql.Connection;
 import java.util.Optional;
 
-public class Next<T> {
+public class Then<T> {
 
 	T bean;
 	Connection c;
 	
-	public Next(Connection c, T bean) {
+	public Then(Connection c, T bean) {
 		super();
 		this.c = c;
 		this.bean = bean;

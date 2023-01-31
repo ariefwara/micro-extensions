@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import com.ariefwara.micro.extensions.db.operation.Delete;
 import com.ariefwara.micro.extensions.db.operation.Insert;
-import com.ariefwara.micro.extensions.db.operation.Next;
+import com.ariefwara.micro.extensions.db.operation.Then;
 import com.ariefwara.micro.extensions.db.operation.Prepared;
 import com.ariefwara.micro.extensions.db.operation.Select;
 import com.ariefwara.micro.extensions.db.operation.Update;
@@ -25,16 +25,16 @@ public class Operation {
 		return new Select(conn).exec(object);
 	}
 	
-	public <T> Next<T> insert(T object){
-		return new Next<T>(conn, new Insert(conn).exec(object).get());
+	public <T> Then<T> insert(T object){
+		return new Then<T>(conn, new Insert(conn).exec(object).get());
 	}
 	 
-	public <T> Next<T> update(T object){
-		return new Next<T>(conn, new Update(conn).exec(object).get());
+	public <T> Then<T> update(T object){
+		return new Then<T>(conn, new Update(conn).exec(object).get());
 	} 
 	
-	public <T> Next<T> delete(T object){
-		return new Next<T>(conn, new Delete(conn).exec(object).get());
+	public <T> Then<T> delete(T object){
+		return new Then<T>(conn, new Delete(conn).exec(object).get());
 	}
 	
 	public <T> List<T> select(Class<T> from, Where condition){
