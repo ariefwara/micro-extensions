@@ -147,7 +147,63 @@ public class Where {
 		return parameters;
 	}
 
-	public <T> List<T> exec(Class<T> from) {
+	public <T> Where update(Class<T> from) {
+		
+		try {
+		
+			StringBuilder sb = new StringBuilder("UPDATE ");
+			sb.append(from.getAnnotation(Entity.class).value());
+			sb.append(buildQuery());
+
+			String query = sb.toString();
+			
+			PreparedStatement ps = new JDBCPreparedStatment(c, query)
+					.setParameters(getParameters())
+					.getPreparedStatement();
+			
+			ResultSet rs = ps.executeQuery();
+			List<T> result = new JDBCResultSet(rs).asList(from);
+			
+			rs.close();
+			ps.close();
+			
+			return this;
+			
+		} catch (Exception e) {
+			throw new UndeclaredThrowableException(e);
+		}
+		
+	}
+	
+	public <T> Where delete(Class<T> from) {
+		
+		try {
+		
+			StringBuilder sb = new StringBuilder("DELETE FROM ");
+			sb.append(from.getAnnotation(Entity.class).value());
+			sb.append(buildQuery());
+
+			String query = sb.toString();
+			
+			PreparedStatement ps = new JDBCPreparedStatment(c, query)
+					.setParameters(getParameters())
+					.getPreparedStatement();
+			
+			ResultSet rs = ps.executeQuery();
+			List<T> result = new JDBCResultSet(rs).asList(from);
+			
+			rs.close();
+			ps.close();
+			
+			return this;
+			
+		} catch (Exception e) {
+			throw new UndeclaredThrowableException(e);
+		}
+		
+	}
+	
+	public <T> List<T> select(Class<T> from) {
 		
 		try {
 		

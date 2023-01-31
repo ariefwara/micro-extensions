@@ -38,7 +38,15 @@ public class Operation {
 	}
 	
 	public <T> List<T> select(Class<T> from, Where condition){
-		return condition.setConnection(conn).exec(from);
+		return condition.setConnection(conn).select(from);
+	}
+	
+	public <T> List<T> update(Class<T> from, Where condition){
+		return condition.setConnection(conn).update(from).select(from);
+	}
+	
+	public <T> List<T> delete(Class<T> from, Where condition){
+		return condition.setConnection(conn).delete(from).select(from);
 	}
 	
 	public <T> T prepared(Class<T> target){
