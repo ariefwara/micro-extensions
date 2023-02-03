@@ -1,4 +1,4 @@
-package com.ariefwara.micro.extensions.db.operation;
+package com.ariefwara.micro.extensions.db.operation.single.record;
 
 import java.io.IOException;
 import java.lang.reflect.UndeclaredThrowableException;
@@ -7,16 +7,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.ariefwara.micro.extensions.common.mapper.FlatBean;
-import com.ariefwara.micro.extensions.db.Statement;
 import com.ariefwara.micro.extensions.db.flag.Entity;
 import com.ariefwara.micro.extensions.db.mapper.EntityBean;
+import com.ariefwara.micro.extensions.db.operation.SingleRecordOperation;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Helper;
 import com.github.jknack.handlebars.Options;
 import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.internal.lang3.StringUtils;
 
-public class Insert extends Statement {
+public class Insert extends SingleRecordOperation {
 
 
 	public Insert(Connection c) {

@@ -2,15 +2,14 @@ package com.ariefwara.micro.extensions.db;
 
 import java.sql.Connection;
 import java.util.List;
-import java.util.Optional;
 
-import com.ariefwara.micro.extensions.db.operation.Delete;
-import com.ariefwara.micro.extensions.db.operation.Insert;
-import com.ariefwara.micro.extensions.db.operation.Then;
-import com.ariefwara.micro.extensions.db.operation.Prepared;
-import com.ariefwara.micro.extensions.db.operation.Select;
-import com.ariefwara.micro.extensions.db.operation.Update;
-import com.ariefwara.micro.extensions.db.operation.Where;
+import com.ariefwara.micro.extensions.db.operation.AdvanceOperation;
+import com.ariefwara.micro.extensions.db.operation.multi.record.Where;
+import com.ariefwara.micro.extensions.db.operation.single.record.Delete;
+import com.ariefwara.micro.extensions.db.operation.single.record.Insert;
+import com.ariefwara.micro.extensions.db.operation.single.record.Select;
+import com.ariefwara.micro.extensions.db.operation.single.record.Then;
+import com.ariefwara.micro.extensions.db.operation.single.record.Update;
 
 public class Operation {
 	
@@ -21,36 +20,41 @@ public class Operation {
 		this.conn = c;
 	}
 	
-	public <T> Optional<T> select(T object){
+	public <T> T select(T object){
 		return new Select(conn).exec(object);
 	}
 	
 	public <T> Then<T> insert(T object){
-		return new Then<T>(conn, new Insert(conn).exec(object).get());
+		return new Then<T>(conn, new Insert(conn).exec(object));
 	}
 	 
 	public <T> Then<T> update(T object){
-		return new Then<T>(conn, new Update(conn).exec(object).get());
+		return new Then<T>(conn, new Update(conn).exec(object));
 	} 
 	
 	public <T> Then<T> delete(T object){
-		return new Then<T>(conn, new Delete(conn).exec(object).get());
+		return new Then<T>(conn, new Delete(conn).exec(object));
 	}
 	
-	public <T> List<T> select(Class<T> from, Where condition){
-		return condition.setConnection(conn).select(from);
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <T> List<T> select(Class<T> from, Where where){
+		return new com.ariefwara.micro.extensions.db.operation.multi.record.Select(conn, from).exec(where);
 	}
 	
-	public <T> List<T> update(Class<T> from, Where condition){
-		return condition.setConnection(conn).update(from).select(from);
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <T> com.ariefwara.micro.extensions.db.operation.multi.record.Then<T> update(T by, Where where){
+		new com.ariefwara.micro.extensions.db.operation.multi.record.Update<>(conn, by.getClass()).exec(where);
+		return new com.ariefwara.micro.extensions.db.operation.multi.record.Then(conn, by.getClass(), where);
 	}
 	
-	public <T> List<T> delete(Class<T> from, Where condition){
-		return condition.setConnection(conn).delete(from).select(from);
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <T> com.ariefwara.micro.extensions.db.operation.multi.record.Then<T> delete(Class<T> from, Where where){
+		new com.ariefwara.micro.extensions.db.operation.multi.record.Delete<>(conn, from).exec(where);
+		return new com.ariefwara.micro.extensions.db.operation.multi.record.Then(conn, from, where);
 	}
 	
 	public <T> T prepared(Class<T> target){
-		return new Prepared(conn).exec(target);
+		return new AdvanceOperation(conn).prepare(target);
 	}
 
 	public Connection getConnection() {

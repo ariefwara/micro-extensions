@@ -1,7 +1,6 @@
-package com.ariefwara.micro.extensions.db.operation;
+package com.ariefwara.micro.extensions.db.operation.single.record;
 
 import java.sql.Connection;
-import java.util.Optional;
 
 public class Then<T> {
 
@@ -14,7 +13,7 @@ public class Then<T> {
 		this.bean = bean;
 	}
 
-	public Optional<T> select() {
+	public T select() {
 		return new Select(c).exec(bean);
 	}
 	

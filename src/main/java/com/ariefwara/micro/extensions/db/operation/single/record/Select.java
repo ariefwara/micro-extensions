@@ -1,4 +1,4 @@
-package com.ariefwara.micro.extensions.db.operation;
+package com.ariefwara.micro.extensions.db.operation.single.record;
 
 import java.lang.reflect.UndeclaredThrowableException;
 import java.sql.Connection;
@@ -6,16 +6,15 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
-import com.ariefwara.micro.extensions.db.Statement;
 import com.ariefwara.micro.extensions.db.flag.Entity;
 import com.ariefwara.micro.extensions.db.mapper.EntityBean;
 import com.ariefwara.micro.extensions.db.mapper.JDBCPreparedStatment;
 import com.ariefwara.micro.extensions.db.mapper.JDBCResultSet;
+import com.ariefwara.micro.extensions.db.operation.SingleRecordOperation;
 import com.axiomalaska.jdbc.NamedParameterPreparedStatement;
 
-public class Select extends Statement {
+public class Select extends SingleRecordOperation {
 
 
 	public Select(Connection c) {
@@ -44,9 +43,10 @@ public class Select extends Statement {
 		return query;
 
 	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> Optional<T> exec(T target) {
+	public <T> T exec(T target) {
 		
 		try {
 			
@@ -58,8 +58,8 @@ public class Select extends Statement {
 			
 			ps.close();
 			
-			if (result.size() == 0) return Optional.empty();
-			return Optional.of(result.get(0));
+			if (result.size() == 0) return null;
+			return result.get(0);
 			
 		} catch (Exception e) {
 			throw new UndeclaredThrowableException(e);

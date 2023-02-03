@@ -5,20 +5,20 @@ import java.sql.Connection;
 import java.util.Map;
 
 import com.ariefwara.micro.extensions.common.mapper.FlatBean;
-import com.ariefwara.micro.extensions.db.operation.flag.Query;
-import com.ariefwara.micro.extensions.db.operation.type.Execution;
-import com.ariefwara.micro.extensions.db.operation.type.Selection;
+import com.ariefwara.micro.extensions.db.operation.advance.Execution;
+import com.ariefwara.micro.extensions.db.operation.advance.Query;
+import com.ariefwara.micro.extensions.db.operation.advance.Selection;
 
-public class Prepared {
+public class AdvanceOperation {
 
 	Connection c;
 	
-	public Prepared(Connection conn) {
+	public AdvanceOperation(Connection conn) {
 		this.c = conn;
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> T exec(Class<T> target) {
+	public <T> T prepare(Class<T> target) {
 		
 		return (T) Proxy.newProxyInstance(target.getClassLoader(),
 			        new Class[]{target},
@@ -38,7 +38,7 @@ public class Prepared {
 		
 	}
 
-	public Prepared setConnection(Connection conn) {
+	public AdvanceOperation setConnection(Connection conn) {
 		this.c = conn;
 		return this;
 	}

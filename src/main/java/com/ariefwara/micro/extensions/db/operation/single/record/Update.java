@@ -1,4 +1,4 @@
-package com.ariefwara.micro.extensions.db.operation;
+package com.ariefwara.micro.extensions.db.operation.single.record;
 
 import java.sql.Connection;
 import java.util.Arrays;
@@ -6,12 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ariefwara.micro.extensions.common.mapper.FlatBean;
-import com.ariefwara.micro.extensions.db.Statement;
 import com.ariefwara.micro.extensions.db.flag.Entity;
 import com.ariefwara.micro.extensions.db.mapper.EntityBean;
+import com.ariefwara.micro.extensions.db.operation.SingleRecordOperation;
 
-public class Update extends Statement {
+public class Update extends SingleRecordOperation {
 
 	public Update(Connection c) {
 		super(c);

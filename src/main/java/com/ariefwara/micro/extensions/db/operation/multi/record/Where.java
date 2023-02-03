@@ -1,20 +1,12 @@
-package com.ariefwara.micro.extensions.db.operation;
+package com.ariefwara.micro.extensions.db.operation.multi.record;
 
 import java.lang.reflect.UndeclaredThrowableException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.text.CaseUtils;
-
-import com.ariefwara.micro.extensions.db.flag.Entity;
-import com.ariefwara.micro.extensions.db.mapper.JDBCPreparedStatment;
-import com.ariefwara.micro.extensions.db.mapper.JDBCResultSet;
-import com.axiomalaska.jdbc.NamedParameterPreparedStatement;
 
 public class Where {
 
@@ -145,97 +137,6 @@ public class Where {
 		}
 
 		return parameters;
-	}
-
-	public <T> Where update(Class<T> from) {
-		
-		try {
-		
-			StringBuilder sb = new StringBuilder("UPDATE ");
-			sb.append(from.getAnnotation(Entity.class).value());
-			sb.append(buildQuery());
-
-			String query = sb.toString();
-			
-			PreparedStatement ps = new JDBCPreparedStatment(c, query)
-					.setParameters(getParameters())
-					.getPreparedStatement();
-			
-			ResultSet rs = ps.executeQuery();
-			List<T> result = new JDBCResultSet(rs).asList(from);
-			
-			rs.close();
-			ps.close();
-			
-			return this;
-			
-		} catch (Exception e) {
-			throw new UndeclaredThrowableException(e);
-		}
-		
-	}
-	
-	public <T> Where delete(Class<T> from) {
-		
-		try {
-		
-			StringBuilder sb = new StringBuilder("DELETE FROM ");
-			sb.append(from.getAnnotation(Entity.class).value());
-			sb.append(buildQuery());
-
-			String query = sb.toString();
-			
-			PreparedStatement ps = new JDBCPreparedStatment(c, query)
-					.setParameters(getParameters())
-					.getPreparedStatement();
-			
-			ResultSet rs = ps.executeQuery();
-			List<T> result = new JDBCResultSet(rs).asList(from);
-			
-			rs.close();
-			ps.close();
-			
-			return this;
-			
-		} catch (Exception e) {
-			throw new UndeclaredThrowableException(e);
-		}
-		
-	}
-	
-	public <T> List<T> select(Class<T> from) {
-		
-		try {
-		
-			StringBuilder sb = new StringBuilder("SELECT * FROM ");
-			sb.append(from.getAnnotation(Entity.class).value());
-			sb.append(buildQuery());
-
-			String query = sb.toString();
-			
-			PreparedStatement ps = new JDBCPreparedStatment(c, query)
-					.setParameters(getParameters())
-					.getPreparedStatement();
-			
-			ResultSet rs = ps.executeQuery();
-			List<T> result = new JDBCResultSet(rs).asList(from);
-			
-			rs.close();
-			ps.close();
-			
-			return result;
-			
-		} catch (Exception e) {
-			throw new UndeclaredThrowableException(e);
-		}
-		
-	}
-
-	Connection c;
-
-	public Where setConnection(Connection c) {
-		this.c = c;
-		return this;
 	}
 
 }

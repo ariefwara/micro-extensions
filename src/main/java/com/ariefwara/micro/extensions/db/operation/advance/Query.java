@@ -1,4 +1,4 @@
-package com.ariefwara.micro.extensions.db.operation.flag;
+package com.ariefwara.micro.extensions.db.operation.advance;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

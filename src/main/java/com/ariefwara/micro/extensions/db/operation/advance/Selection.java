@@ -1,4 +1,4 @@
-package com.ariefwara.micro.extensions.db.operation.type;
+package com.ariefwara.micro.extensions.db.operation.advance;
 
 import java.util.ArrayList;
 import java.util.Map;
