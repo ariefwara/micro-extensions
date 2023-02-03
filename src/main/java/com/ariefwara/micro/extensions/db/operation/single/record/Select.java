@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ariefwara.micro.extensions.db.SingleRecordOperation;
 import com.ariefwara.micro.extensions.db.flag.Entity;
 import com.ariefwara.micro.extensions.db.mapper.EntityBean;
 import com.ariefwara.micro.extensions.db.mapper.JDBCPreparedStatment;
 import com.ariefwara.micro.extensions.db.mapper.JDBCResultSet;
-import com.ariefwara.micro.extensions.db.operation.SingleRecordOperation;
 import com.axiomalaska.jdbc.NamedParameterPreparedStatement;
 
 public class Select extends SingleRecordOperation {

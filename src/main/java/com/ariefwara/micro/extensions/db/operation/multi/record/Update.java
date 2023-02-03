@@ -6,10 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 
+import com.ariefwara.micro.extensions.db.MultiRecordOperation;
 import com.ariefwara.micro.extensions.db.flag.Entity;
 import com.ariefwara.micro.extensions.db.mapper.JDBCPreparedStatment;
 import com.ariefwara.micro.extensions.db.mapper.JDBCResultSet;
-import com.ariefwara.micro.extensions.db.operation.MultiRecordOperation;
 
 public class Update<T> extends MultiRecordOperation<T> {
 

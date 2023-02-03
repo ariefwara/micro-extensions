@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.ariefwara.micro.extensions.common.mapper.FlatBean;
+import com.ariefwara.micro.extensions.db.SingleRecordOperation;
 import com.ariefwara.micro.extensions.db.flag.Entity;
 import com.ariefwara.micro.extensions.db.mapper.EntityBean;
-import com.ariefwara.micro.extensions.db.operation.SingleRecordOperation;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Helper;
 import com.github.jknack.handlebars.Options;

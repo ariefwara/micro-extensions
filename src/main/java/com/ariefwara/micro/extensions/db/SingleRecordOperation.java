@@ -1,4 +1,4 @@
-package com.ariefwara.micro.extensions.db.operation;
+package com.ariefwara.micro.extensions.db;
 
 import java.lang.reflect.UndeclaredThrowableException;
 import java.sql.Connection;

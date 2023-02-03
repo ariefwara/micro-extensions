@@ -1,4 +1,4 @@
-package com.ariefwara.micro.extensions.db.operation;
+package com.ariefwara.micro.extensions.db;
 
 import java.sql.Connection;
 import java.util.List;

@@ -3,7 +3,6 @@ package com.ariefwara.micro.extensions.db;
 import java.sql.Connection;
 import java.util.List;
 
-import com.ariefwara.micro.extensions.db.operation.AdvanceOperation;
 import com.ariefwara.micro.extensions.db.operation.multi.record.Where;
 import com.ariefwara.micro.extensions.db.operation.single.record.Delete;
 import com.ariefwara.micro.extensions.db.operation.single.record.Insert;
